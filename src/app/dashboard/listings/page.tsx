@@ -88,7 +88,7 @@ export default function ManageListingsPage() {
       try {
         const { createClient } = await import('@/lib/supabase/client')
         const supabase = createClient()
-        await supabase.from('listings').update({ status: newStatus as 'active' | 'inactive' | 'sold' | 'traded' }).eq('id', listingId)
+        await (supabase.from('listings').update({ status: newStatus } as any).eq('id', listingId))
         setListings(prev => prev.map(l => 
           l.id === listingId ? { ...l, status: newStatus } : l
         ))
