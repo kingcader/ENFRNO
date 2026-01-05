@@ -78,8 +78,8 @@ export default function RegisterPage() {
         if (signUpError) throw signUpError
 
         if (authData.user) {
-          // @ts-ignore - Supabase types not generated
-          await supabase.from('profiles').insert({
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          await (supabase as any).from('profiles').insert({
             id: authData.user.id,
             username,
             state,

@@ -127,17 +127,19 @@ export default function SettingsPage() {
         
         if (!user) throw new Error('Not logged in')
 
-        // @ts-ignore - Supabase types not generated
-        const { error } = await supabase
+        const updateData = {
+          username,
+          full_name: fullName || null,
+          bio: bio || null,
+          location: location || null,
+          state: state || null,
+          updated_at: new Date().toISOString(),
+        }
+        
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const { error } = await (supabase as any)
           .from('profiles')
-          .update({
-            username,
-            full_name: fullName || null,
-            bio: bio || null,
-            location: location || null,
-            state: state || null,
-            updated_at: new Date().toISOString(),
-          })
+          .update(updateData)
           .eq('id', user.id)
 
         if (error) throw error

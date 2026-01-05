@@ -21,14 +21,8 @@ export async function middleware(request: NextRequest) {
 
   // Supabase mode - handle auth server-side
   try {
-    const { createMiddlewareClient } = await import('@/lib/supabase/middleware')
-    const response = NextResponse.next({ request })
-    const supabase = createMiddlewareClient(request, response)
-    
-    // Refresh session
-    await supabase.auth.getSession()
-    
-    return response
+    const { updateSession } = await import('@/lib/supabase/middleware')
+    return await updateSession(request)
   } catch {
     return NextResponse.next()
   }

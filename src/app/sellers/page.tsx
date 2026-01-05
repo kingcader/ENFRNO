@@ -10,7 +10,8 @@ async function getSellers() {
       const { createClient } = await import('@/lib/supabase/server')
       const supabase = await createClient()
       
-      const { data: profiles, error } = await supabase
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { data: profiles, error } = await (supabase as any)
         .from('profiles')
         .select('*')
         .eq('is_verified', true)
@@ -18,8 +19,10 @@ async function getSellers() {
 
       if (!error && profiles && profiles.length > 0) {
         const sellersWithCounts = await Promise.all(
-          profiles.map(async (profile) => {
-            const { count } = await supabase
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          profiles.map(async (profile: any) => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const { count } = await (supabase as any)
               .from('listings')
               .select('*', { count: 'exact', head: true })
               .eq('seller_id', profile.id)

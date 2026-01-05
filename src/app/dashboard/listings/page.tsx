@@ -65,8 +65,8 @@ export default function ManageListingsPage() {
       try {
         const { createClient } = await import('@/lib/supabase/client')
         const supabase = createClient()
-        // @ts-ignore - Supabase types not generated
-        await supabase.from('listings').delete().eq('id', listingId)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        await (supabase as any).from('listings').delete().eq('id', listingId)
         setListings(prev => prev.filter(l => l.id !== listingId))
       } catch {
         alert('Failed to delete listing')
@@ -89,10 +89,10 @@ export default function ManageListingsPage() {
       try {
         const { createClient } = await import('@/lib/supabase/client')
         const supabase = createClient()
-        // @ts-ignore - Supabase types not fully inferred in demo mode
-        await supabase.from('listings').update({ status: newStatus }).eq('id', listingId)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        await (supabase as any).from('listings').update({ status: newStatus }).eq('id', listingId)
         setListings(prev => prev.map(l => 
-          l.id === listingId ? { ...l, status: newStatus } : l
+          l.id === listingId ? { ...l, status: newStatus as 'active' | 'inactive' | 'sold' | 'traded' } : l
         ))
       } catch {
         alert('Failed to update listing')

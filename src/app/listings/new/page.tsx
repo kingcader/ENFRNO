@@ -115,15 +115,15 @@ export default function NewListingPage() {
       // Generate slug
       const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '-' + Date.now()
 
-      // @ts-ignore - Supabase types not generated
-      const { error: insertError } = await supabase
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { error: insertError } = await (supabase as any)
         .from('listings')
         .insert({
           seller_id: user.id,
           title,
-          description,
+          description: description || null,
           brand,
-          model,
+          model: model || null,
           size,
           condition,
           price: parseFloat(price),

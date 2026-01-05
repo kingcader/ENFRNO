@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { ArrowLeft, Shield, MapPin, Calendar, Package } from 'lucide-react'
 import { getDemoProfileByUsername, isDemoMode } from '@/lib/demo-data'
 import ListingCard from '@/components/ListingCard'
+import type { ListingWithSeller } from '@/types/database'
 
 async function getSeller(username: string) {
   const demoData = getDemoProfileByUsername(username)
@@ -13,14 +14,16 @@ async function getSeller(username: string) {
       const { createClient } = await import('@/lib/supabase/server')
       const supabase = await createClient()
       
-      const { data: profile, error } = await supabase
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { data: profile, error } = await (supabase as any)
         .from('profiles')
         .select('*')
         .eq('username', username)
         .single()
 
       if (!error && profile) {
-        const { data: listings } = await supabase
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const { data: listings } = await (supabase as any)
           .from('listings')
           .select(`*, profiles(*)`)
           .eq('seller_id', profile.id)
@@ -127,7 +130,7 @@ export default async function SellerPage({ params }: { params: Promise<{ usernam
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {listings.map((listing) => (
+              {(listings as ListingWithSeller[]).map((listing) => (
                 <ListingCard key={listing.id} listing={listing} />
               ))}
             </div>

@@ -17,9 +17,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  turbopack: {
-    root: 'C:\\Users\\kinca\\Enfrno\\enfrno',
-  },
 };
 
 export default nextConfig;

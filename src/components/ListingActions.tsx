@@ -14,13 +14,13 @@ export default function ListingActions({ listingId, status }: ListingActionsProp
   const [loading, setLoading] = useState(false)
   const [showMenu, setShowMenu] = useState(false)
   const router = useRouter()
-  const supabase = createClient()
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const supabase = createClient() as any
 
   const toggleStatus = async () => {
     setLoading(true)
     try {
       const newStatus = status === 'active' ? 'inactive' : 'active'
-      // @ts-ignore - Supabase types not generated
       const { error } = await supabase
         .from('listings')
         .update({ status: newStatus, updated_at: new Date().toISOString() })
@@ -42,7 +42,6 @@ export default function ListingActions({ listingId, status }: ListingActionsProp
     
     setLoading(true)
     try {
-      // @ts-ignore - Supabase types not generated
       const { error } = await supabase
         .from('listings')
         .delete()
@@ -62,7 +61,6 @@ export default function ListingActions({ listingId, status }: ListingActionsProp
   const markAsSold = async () => {
     setLoading(true)
     try {
-      // @ts-ignore - Supabase types not generated
       const { error } = await supabase
         .from('listings')
         .update({ status: 'sold', updated_at: new Date().toISOString() })

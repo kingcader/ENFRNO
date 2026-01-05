@@ -12,16 +12,16 @@ interface TradeOfferActionsProps {
 export default function TradeOfferActions({ offerId }: TradeOfferActionsProps) {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
-  const supabase = createClient()
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const supabase = createClient() as any
 
-  const handleAction = async (status: 'accepted' | 'rejected') => {
+  const handleAction = async (newStatus: 'accepted' | 'rejected') => {
     setLoading(true)
     
     try {
-      // @ts-ignore - Supabase types not generated
       const { error } = await supabase
         .from('trade_offers')
-        .update({ status, updated_at: new Date().toISOString() })
+        .update({ status: newStatus, updated_at: new Date().toISOString() })
         .eq('id', offerId)
 
       if (error) throw error
