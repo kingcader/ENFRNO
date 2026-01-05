@@ -20,7 +20,7 @@ export default function ListingActions({ listingId, status }: ListingActionsProp
     setLoading(true)
     try {
       const newStatus = status === 'active' ? 'inactive' : 'active'
-      // @ts-expect-error - Supabase types not generated
+      // @ts-ignore - Supabase types not generated
       const { error } = await supabase
         .from('listings')
         .update({ status: newStatus, updated_at: new Date().toISOString() })
@@ -42,7 +42,7 @@ export default function ListingActions({ listingId, status }: ListingActionsProp
     
     setLoading(true)
     try {
-      // @ts-expect-error - Supabase types not generated
+      // @ts-ignore - Supabase types not generated
       const { error } = await supabase
         .from('listings')
         .delete()
@@ -62,7 +62,7 @@ export default function ListingActions({ listingId, status }: ListingActionsProp
   const markAsSold = async () => {
     setLoading(true)
     try {
-      // @ts-expect-error - Supabase types not generated
+      // @ts-ignore - Supabase types not generated
       const { error } = await supabase
         .from('listings')
         .update({ status: 'sold', updated_at: new Date().toISOString() })

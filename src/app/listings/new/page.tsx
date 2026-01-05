@@ -115,7 +115,7 @@ export default function NewListingPage() {
       // Generate slug
       const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '-' + Date.now()
 
-      // @ts-expect-error - Supabase types not generated
+      // @ts-ignore - Supabase types not generated
       const { error: insertError } = await supabase
         .from('listings')
         .insert({

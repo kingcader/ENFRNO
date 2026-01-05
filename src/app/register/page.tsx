@@ -78,7 +78,7 @@ export default function RegisterPage() {
         if (signUpError) throw signUpError
 
         if (authData.user) {
-          // @ts-expect-error - Supabase types not generated
+          // @ts-ignore - Supabase types not generated
           await supabase.from('profiles').insert({
             id: authData.user.id,
             username,

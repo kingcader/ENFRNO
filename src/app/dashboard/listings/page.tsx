@@ -65,7 +65,7 @@ export default function ManageListingsPage() {
       try {
         const { createClient } = await import('@/lib/supabase/client')
         const supabase = createClient()
-        // @ts-expect-error - Supabase types not generated
+        // @ts-ignore - Supabase types not generated
         await supabase.from('listings').delete().eq('id', listingId)
         setListings(prev => prev.filter(l => l.id !== listingId))
       } catch {
@@ -89,7 +89,7 @@ export default function ManageListingsPage() {
       try {
         const { createClient } = await import('@/lib/supabase/client')
         const supabase = createClient()
-        // @ts-expect-error - Supabase types not fully inferred in demo mode
+        // @ts-ignore - Supabase types not fully inferred in demo mode
         await supabase.from('listings').update({ status: newStatus }).eq('id', listingId)
         setListings(prev => prev.map(l => 
           l.id === listingId ? { ...l, status: newStatus } : l

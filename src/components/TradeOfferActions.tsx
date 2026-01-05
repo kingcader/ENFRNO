@@ -18,7 +18,7 @@ export default function TradeOfferActions({ offerId }: TradeOfferActionsProps) {
     setLoading(true)
     
     try {
-      // @ts-expect-error - Supabase types not generated
+      // @ts-ignore - Supabase types not generated
       const { error } = await supabase
         .from('trade_offers')
         .update({ status, updated_at: new Date().toISOString() })

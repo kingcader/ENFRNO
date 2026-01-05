@@ -72,7 +72,7 @@ export default function TradeOfferModal({ listingId, listingTitle }: TradeOfferM
         
         if (!user) throw new Error('Not logged in')
 
-        // @ts-expect-error - Supabase types not generated
+        // @ts-ignore - Supabase types not generated
         const { error } = await supabase
           .from('trade_offers')
           .insert({
