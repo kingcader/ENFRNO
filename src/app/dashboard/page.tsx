@@ -41,7 +41,6 @@ export default function DashboardPage() {
             return
           }
 
-          // @ts-expect-error - Supabase types not fully inferred in demo mode
           const { data: profile } = await supabase
             .from('profiles')
             .select('username')
@@ -50,7 +49,6 @@ export default function DashboardPage() {
 
           setUsername((profile as { username: string } | null)?.username || 'User')
 
-          // @ts-expect-error - Supabase types not fully inferred in demo mode
           const { data: userListings } = await supabase
             .from('listings')
             .select(`*, profiles(*)`)
