@@ -65,6 +65,7 @@ export default function ManageListingsPage() {
       try {
         const { createClient } = await import('@/lib/supabase/client')
         const supabase = createClient()
+        // @ts-expect-error - Supabase types not generated
         await supabase.from('listings').delete().eq('id', listingId)
         setListings(prev => prev.filter(l => l.id !== listingId))
       } catch {

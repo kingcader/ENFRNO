@@ -54,6 +54,7 @@ export default function MessageSellerButton({ listingId, sellerId, sellerName }:
         
         if (!user) throw new Error('Not logged in')
 
+        // @ts-expect-error - Supabase types not generated
         const { error } = await supabase
           .from('messages')
           .insert({

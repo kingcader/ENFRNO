@@ -127,6 +127,7 @@ export default function SettingsPage() {
         
         if (!user) throw new Error('Not logged in')
 
+        // @ts-expect-error - Supabase types not generated
         const { error } = await supabase
           .from('profiles')
           .update({

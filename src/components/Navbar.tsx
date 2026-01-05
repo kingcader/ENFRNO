@@ -45,7 +45,7 @@ export default function Navbar() {
             .select('username')
             .eq('id', user.id)
             .single()
-          setUsername(profile?.username || '')
+          setUsername((profile as { username: string } | null)?.username || '')
         }
       } catch {
         setIsLoggedIn(false)
