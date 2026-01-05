@@ -77,12 +77,13 @@ export default function SettingsPage() {
             .eq('id', user.id)
             .single()
 
-          if (profile) {
-            setUsername(profile.username || '')
-            setFullName(profile.full_name || '')
-            setBio(profile.bio || '')
-            setLocation(profile.location || '')
-            setState(profile.state || '')
+          const profileData = profile as { username?: string; full_name?: string; bio?: string; location?: string; state?: string } | null
+          if (profileData) {
+            setUsername(profileData.username || '')
+            setFullName(profileData.full_name || '')
+            setBio(profileData.bio || '')
+            setLocation(profileData.location || '')
+            setState(profileData.state || '')
           }
         } catch {
           router.push('/login')
