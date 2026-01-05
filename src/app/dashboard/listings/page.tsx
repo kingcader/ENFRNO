@@ -88,7 +88,8 @@ export default function ManageListingsPage() {
       try {
         const { createClient } = await import('@/lib/supabase/client')
         const supabase = createClient()
-        await (supabase.from('listings').update({ status: newStatus } as any).eq('id', listingId))
+        // @ts-expect-error - Supabase types not fully inferred in demo mode
+        await supabase.from('listings').update({ status: newStatus }).eq('id', listingId)
         setListings(prev => prev.map(l => 
           l.id === listingId ? { ...l, status: newStatus } : l
         ))
