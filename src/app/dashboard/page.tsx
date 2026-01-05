@@ -80,7 +80,7 @@ export default function DashboardPage() {
   const soldListings = listings.filter(l => l.status === 'sold')
 
   return (
-    <div className="min-h-screen py-12 bg-gray-50">
+    <div className="min-h-screen pt-12 pb-24 md:pb-12 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Demo Mode Banner */}
         {isDemoMode() && (

@@ -182,7 +182,7 @@ export default function Navbar() {
 
       {/* Mobile Top Bar (Logo Only) */}
       <nav className="md:hidden fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 px-4 h-14 flex items-center justify-center">
-        <Logo size="sm" showText={true} />
+        <Logo size="md" showText={true} />
       </nav>
     </>
   )

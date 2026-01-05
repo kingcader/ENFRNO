@@ -88,42 +88,42 @@ function BrowseContent() {
   const hasActiveFilters = selectedBrand || selectedCondition || selectedSize || selectedState || openToTradesOnly
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen pt-8 pb-24 md:pb-8 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-12">
-          <h1 className="text-5xl md:text-7xl font-black mb-4 uppercase italic">BROWSE KICKS</h1>
-          <p className="text-gray-400 text-lg">Find your next pair from our community of sellers</p>
+          <h1 className="text-4xl md:text-7xl font-bold mb-4 uppercase text-[#111] tracking-tight">Browse Kicks</h1>
+          <p className="text-gray-500 text-lg">Find your next pair from our community of sellers</p>
         </div>
 
         {/* Search & Filter Bar */}
         <div className="flex flex-col md:flex-row gap-4 mb-8">
           <div className="flex-1 relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
             <input
               type="text"
-              placeholder="SEARCH SNEAKERS..."
+              placeholder="Search sneakers..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && updateURL()}
-              className="input pl-12 text-lg uppercase font-bold tracking-wide h-14"
+              className="input pl-12 text-lg font-medium h-14 bg-gray-50 focus:bg-white border-gray-100 placeholder-gray-400"
             />
           </div>
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className={`btn-secondary h-14 flex items-center gap-2 ${showFilters ? 'bg-white text-black' : ''}`}
+            className={`btn-secondary h-14 flex items-center gap-2 shadow-sm ${showFilters ? 'bg-gray-100 text-[#111]' : ''}`}
           >
             <SlidersHorizontal className="w-5 h-5" />
             <span>Filters</span>
             {hasActiveFilters && (
-              <span className="w-2 h-2 rounded-full bg-orange-500" />
+              <span className="w-2 h-2 rounded-full bg-orange-600" />
             )}
           </button>
         </div>
 
         {/* Filters Panel */}
         {showFilters && (
-          <div className="bg-[#0a0a0a] border border-[#222] p-6 mb-12 animate-fade-in-down">
+          <div className="bg-white border border-gray-100 rounded-2xl p-6 mb-12 animate-fade-in-down shadow-xl shadow-gray-200/50">
             <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
               {/* Brand */}
               <div>
@@ -131,7 +131,7 @@ function BrowseContent() {
                 <select
                   value={selectedBrand}
                   onChange={(e) => setSelectedBrand(e.target.value)}
-                  className="input"
+                  className="input bg-gray-50 focus:bg-white"
                 >
                   <option value="">All Brands</option>
                   {BRANDS.map(brand => (
@@ -146,7 +146,7 @@ function BrowseContent() {
                 <select
                   value={selectedSize}
                   onChange={(e) => setSelectedSize(e.target.value)}
-                  className="input"
+                  className="input bg-gray-50 focus:bg-white"
                 >
                   <option value="">All Sizes</option>
                   {SIZES.map(size => (
@@ -161,7 +161,7 @@ function BrowseContent() {
                 <select
                   value={selectedCondition}
                   onChange={(e) => setSelectedCondition(e.target.value)}
-                  className="input"
+                  className="input bg-gray-50 focus:bg-white"
                 >
                   <option value="">All Conditions</option>
                   {CONDITIONS.map(c => (
@@ -176,7 +176,7 @@ function BrowseContent() {
                 <select
                   value={selectedState}
                   onChange={(e) => setSelectedState(e.target.value)}
-                  className="input"
+                  className="input bg-gray-50 focus:bg-white"
                 >
                   <option value="">All States</option>
                   {STATES.map(state => (
@@ -187,24 +187,24 @@ function BrowseContent() {
 
               {/* Trade Only */}
               <div className="flex items-end">
-                <label className="flex items-center gap-3 cursor-pointer p-3 border border-[#333] hover:border-orange-500 transition-colors w-full h-[50px] bg-[#111]">
+                <label className="flex items-center gap-3 cursor-pointer p-3 border border-gray-200 rounded-lg hover:border-orange-500 transition-colors w-full h-[50px] bg-gray-50 hover:bg-white">
                   <input
                     type="checkbox"
                     checked={openToTradesOnly}
                     onChange={(e) => setOpenToTradesOnly(e.target.checked)}
-                    className="w-5 h-5 accent-orange-500"
+                    className="w-5 h-5 accent-orange-600 rounded border-gray-300"
                   />
-                  <span className="text-sm font-bold uppercase tracking-wide">Open to Trades</span>
+                  <span className="text-sm font-bold uppercase tracking-wide text-[#111]">Open to Trades</span>
                 </label>
               </div>
             </div>
 
-            <div className="flex gap-4 mt-8 pt-6 border-t border-[#222]">
-              <button onClick={updateURL} className="btn-primary">
+            <div className="flex gap-4 mt-8 pt-6 border-t border-gray-100">
+              <button onClick={updateURL} className="btn-primary shadow-none">
                 Apply Filters
               </button>
               {hasActiveFilters && (
-                <button onClick={clearFilters} className="text-gray-500 hover:text-white uppercase font-bold text-sm tracking-wide flex items-center gap-2 px-4">
+                <button onClick={clearFilters} className="text-gray-500 hover:text-[#111] uppercase font-bold text-sm tracking-wide flex items-center gap-2 px-4 transition-colors">
                   <X className="w-4 h-4" />
                   Clear All
                 </button>
@@ -214,7 +214,7 @@ function BrowseContent() {
         )}
 
         {/* Results count */}
-        <div className="mb-6 text-gray-400 font-medium uppercase tracking-wide text-sm border-b border-[#222] pb-4">
+        <div className="mb-6 text-gray-400 font-medium uppercase tracking-wide text-sm border-b border-gray-100 pb-4">
           {loading ? 'Loading...' : `${listings.length} listings found`}
         </div>
 
@@ -223,20 +223,20 @@ function BrowseContent() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[...Array(8)].map((_, i) => (
               <div key={i} className="animate-pulse">
-                <div className="aspect-[4/5] bg-[#111] mb-4" />
+                <div className="aspect-[4/5] bg-gray-100 rounded-2xl mb-4" />
                 <div className="space-y-3">
-                  <div className="h-4 bg-[#111] w-3/4" />
-                  <div className="h-6 bg-[#111] w-1/2" />
+                  <div className="h-4 bg-gray-100 rounded w-3/4" />
+                  <div className="h-6 bg-gray-100 rounded w-1/2" />
                 </div>
               </div>
             ))}
           </div>
         ) : listings.length === 0 ? (
-          <div className="text-center py-32 border border-[#222] bg-[#0a0a0a]">
+          <div className="text-center py-32 border border-gray-100 bg-gray-50 rounded-3xl">
             <div className="text-6xl mb-6 opacity-20">👟</div>
-            <h3 className="text-2xl font-black uppercase mb-2">No sneakers found</h3>
-            <p className="text-gray-400 mb-8 max-w-md mx-auto">Try adjusting your filters or search term to find what you're looking for.</p>
-            <button onClick={clearFilters} className="btn-primary">
+            <h3 className="text-2xl font-bold text-[#111] mb-2">No sneakers found</h3>
+            <p className="text-gray-500 mb-8 max-w-md mx-auto">Try adjusting your filters or search term to find what you&apos;re looking for.</p>
+            <button onClick={clearFilters} className="btn-primary shadow-none">
               Clear Filters
             </button>
           </div>
@@ -255,18 +255,18 @@ function BrowseContent() {
 export default function BrowsePage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen py-8">
+      <div className="min-h-screen py-8 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="animate-pulse">
-            <div className="h-20 bg-[#111] w-1/3 mb-4" />
-            <div className="h-6 bg-[#111] w-1/4 mb-12" />
+            <div className="h-20 bg-gray-100 rounded w-1/3 mb-4" />
+            <div className="h-6 bg-gray-100 rounded w-1/4 mb-12" />
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {[...Array(8)].map((_, i) => (
                 <div key={i} className="">
-                  <div className="aspect-[4/5] bg-[#111] mb-4" />
+                  <div className="aspect-[4/5] bg-gray-100 rounded-2xl mb-4" />
                   <div className="space-y-3">
-                    <div className="h-4 bg-[#111] w-3/4" />
-                    <div className="h-6 bg-[#111] w-1/2" />
+                    <div className="h-4 bg-gray-100 rounded w-3/4" />
+                    <div className="h-6 bg-gray-100 rounded w-1/2" />
                   </div>
                 </div>
               ))}

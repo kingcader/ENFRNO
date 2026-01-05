@@ -45,7 +45,7 @@ export default async function ListingPage({ params }: { params: Promise<{ slug: 
   }
 
   return (
-    <div className="min-h-screen py-12 bg-white">
+    <div className="min-h-screen pt-12 pb-24 md:pb-12 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
         <div className="mb-8">
