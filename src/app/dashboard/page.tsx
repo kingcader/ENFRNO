@@ -80,15 +80,15 @@ export default function DashboardPage() {
   const soldListings = listings.filter(l => l.status === 'sold')
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen py-12 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Demo Mode Banner */}
         {isDemoMode() && (
-          <div className="mb-6 p-4 bg-orange-500/10 border border-orange-500/50 flex items-start gap-3">
-            <AlertCircle className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
+          <div className="mb-8 p-4 bg-orange-50 border border-orange-100 rounded-xl flex items-start gap-3">
+            <AlertCircle className="w-5 h-5 text-orange-600 flex-shrink-0 mt-0.5" />
             <div>
-              <p className="text-orange-500 font-medium text-sm">Demo Mode</p>
-              <p className="text-gray-400 text-xs mt-1">
+              <p className="text-orange-600 font-bold text-sm">Demo Mode</p>
+              <p className="text-orange-600/80 text-xs mt-1">
                 This is a demo dashboard. Connect Supabase to enable full functionality.
               </p>
             </div>
@@ -96,111 +96,117 @@ export default function DashboardPage() {
         )}
 
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-10">
           <div>
-            <h1 className="text-3xl md:text-4xl font-black uppercase">Dashboard</h1>
-            <p className="text-gray-400 mt-1 uppercase tracking-wide">Welcome back, {username}!</p>
+            <h1 className="text-3xl md:text-4xl font-bold text-[#111] tracking-tight">Dashboard</h1>
+            <p className="text-gray-500 mt-1 text-lg">Welcome back, {username}!</p>
           </div>
-          <Link href="/listings/new" className="btn-primary flex items-center gap-2 w-fit">
+          <Link href="/listings/new" className="btn-primary flex items-center gap-2 w-fit shadow-none">
             <Plus className="w-5 h-5" />
             New Listing
           </Link>
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-          <div className="bg-[#0a0a0a] border border-[#222] p-6 hover:border-orange-500 transition-colors">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 bg-orange-500/20 flex items-center justify-center">
-                <Package className="w-5 h-5 text-orange-500" />
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+          <div className="bg-white border border-gray-100 rounded-2xl p-6 hover:shadow-lg hover:shadow-gray-200/50 transition-all">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 bg-orange-50 rounded-full flex items-center justify-center">
+                <Package className="w-5 h-5 text-orange-600" />
               </div>
-              <span className="text-sm text-gray-400 uppercase font-bold tracking-wide">Active</span>
+              <span className="text-sm text-gray-500 font-medium">Active</span>
             </div>
-            <p className="text-3xl font-black">{activeListings.length}</p>
+            <p className="text-3xl font-bold text-[#111]">{activeListings.length}</p>
           </div>
 
-          <div className="bg-[#0a0a0a] border border-[#222] p-6 hover:border-green-500 transition-colors">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 bg-green-500/20 flex items-center justify-center">
-                <TrendingUp className="w-5 h-5 text-green-500" />
+          <div className="bg-white border border-gray-100 rounded-2xl p-6 hover:shadow-lg hover:shadow-gray-200/50 transition-all">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center">
+                <TrendingUp className="w-5 h-5 text-green-600" />
               </div>
-              <span className="text-sm text-gray-400 uppercase font-bold tracking-wide">Sold</span>
+              <span className="text-sm text-gray-500 font-medium">Sold</span>
             </div>
-            <p className="text-3xl font-black">{soldListings.length}</p>
+            <p className="text-3xl font-bold text-[#111]">{soldListings.length}</p>
           </div>
 
-          <div className="bg-[#0a0a0a] border border-[#222] p-6 hover:border-blue-500 transition-colors">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 bg-blue-500/20 flex items-center justify-center">
-                <Repeat className="w-5 h-5 text-blue-500" />
+          <div className="bg-white border border-gray-100 rounded-2xl p-6 hover:shadow-lg hover:shadow-gray-200/50 transition-all">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center">
+                <Repeat className="w-5 h-5 text-blue-600" />
               </div>
-              <span className="text-sm text-gray-400 uppercase font-bold tracking-wide">Trades</span>
+              <span className="text-sm text-gray-500 font-medium">Trades</span>
             </div>
-            <p className="text-3xl font-black">{tradeOfferCount}</p>
+            <p className="text-3xl font-bold text-[#111]">{tradeOfferCount}</p>
           </div>
 
-          <div className="bg-[#0a0a0a] border border-[#222] p-6 hover:border-purple-500 transition-colors">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 bg-purple-500/20 flex items-center justify-center">
-                <MessageCircle className="w-5 h-5 text-purple-500" />
+          <div className="bg-white border border-gray-100 rounded-2xl p-6 hover:shadow-lg hover:shadow-gray-200/50 transition-all">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 bg-purple-50 rounded-full flex items-center justify-center">
+                <MessageCircle className="w-5 h-5 text-purple-600" />
               </div>
-              <span className="text-sm text-gray-400 uppercase font-bold tracking-wide">Messages</span>
+              <span className="text-sm text-gray-500 font-medium">Messages</span>
             </div>
-            <p className="text-3xl font-black">{messageCount}</p>
+            <p className="text-3xl font-bold text-[#111]">{messageCount}</p>
           </div>
         </div>
 
         {/* Quick Actions */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <Link 
             href="/dashboard/listings" 
-            className="bg-[#0a0a0a] border border-[#222] p-6 hover:border-orange-500 transition-all group hover:-translate-y-1"
+            className="bg-white border border-gray-100 rounded-2xl p-8 hover:border-orange-200 hover:shadow-lg hover:shadow-orange-500/5 transition-all group"
           >
-            <Package className="w-8 h-8 text-orange-500 mb-4" />
-            <h3 className="font-black text-xl uppercase italic mb-2 group-hover:text-orange-500 transition-colors">
+            <div className="w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-orange-50 transition-colors">
+              <Package className="w-6 h-6 text-gray-600 group-hover:text-orange-600 transition-colors" />
+            </div>
+            <h3 className="font-bold text-lg text-[#111] mb-2 group-hover:text-orange-600 transition-colors">
               Manage Listings
             </h3>
-            <p className="text-gray-400 text-sm">Edit, pause, or delete your listings</p>
+            <p className="text-gray-500 text-sm">Edit, pause, or delete your listings</p>
           </Link>
 
           <Link 
             href="/dashboard/trades" 
-            className="bg-[#0a0a0a] border border-[#222] p-6 hover:border-orange-500 transition-all group hover:-translate-y-1"
+            className="bg-white border border-gray-100 rounded-2xl p-8 hover:border-orange-200 hover:shadow-lg hover:shadow-orange-500/5 transition-all group"
           >
-            <Repeat className="w-8 h-8 text-orange-500 mb-4" />
-            <h3 className="font-black text-xl uppercase italic mb-2 group-hover:text-orange-500 transition-colors">
+            <div className="w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-orange-50 transition-colors">
+              <Repeat className="w-6 h-6 text-gray-600 group-hover:text-orange-600 transition-colors" />
+            </div>
+            <h3 className="font-bold text-lg text-[#111] mb-2 group-hover:text-orange-600 transition-colors">
               Trade Offers
             </h3>
-            <p className="text-gray-400 text-sm">Review and respond to trade offers</p>
+            <p className="text-gray-500 text-sm">Review and respond to trade offers</p>
           </Link>
 
           <Link 
             href="/dashboard/settings" 
-            className="bg-[#0a0a0a] border border-[#222] p-6 hover:border-orange-500 transition-all group hover:-translate-y-1"
+            className="bg-white border border-gray-100 rounded-2xl p-8 hover:border-orange-200 hover:shadow-lg hover:shadow-orange-500/5 transition-all group"
           >
-            <Settings className="w-8 h-8 text-orange-500 mb-4" />
-            <h3 className="font-black text-xl uppercase italic mb-2 group-hover:text-orange-500 transition-colors">
+            <div className="w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-orange-50 transition-colors">
+              <Settings className="w-6 h-6 text-gray-600 group-hover:text-orange-600 transition-colors" />
+            </div>
+            <h3 className="font-bold text-lg text-[#111] mb-2 group-hover:text-orange-600 transition-colors">
               Profile Settings
             </h3>
-            <p className="text-gray-400 text-sm">Update your profile and preferences</p>
+            <p className="text-gray-500 text-sm">Update your profile and preferences</p>
           </Link>
         </div>
 
         {/* Your Listings */}
         <div>
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-3xl font-black uppercase italic">Your Listings</h2>
-            <Link href="/dashboard/listings" className="text-orange-500 text-sm font-bold uppercase tracking-wider hover:underline">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-2xl font-bold text-[#111]">Your Listings</h2>
+            <Link href="/dashboard/listings" className="text-orange-600 text-sm font-bold hover:text-orange-700 transition-colors">
               View All →
             </Link>
           </div>
 
           {activeListings.length === 0 ? (
-            <div className="bg-[#0a0a0a] border border-[#222] p-10 text-center">
-              <div className="text-6xl mb-4">👟</div>
-              <h3 className="text-xl font-bold uppercase mb-2">No listings yet</h3>
-              <p className="text-gray-400 mb-6">Create your first listing and start selling!</p>
-              <Link href="/listings/new" className="btn-primary inline-flex items-center gap-2">
+            <div className="bg-white border border-gray-100 rounded-2xl p-12 text-center">
+              <div className="text-6xl mb-6 opacity-20">👟</div>
+              <h3 className="text-xl font-bold text-[#111] mb-2">No listings yet</h3>
+              <p className="text-gray-500 mb-8">Create your first listing and start selling!</p>
+              <Link href="/listings/new" className="btn-primary inline-flex items-center gap-2 shadow-none">
                 <Plus className="w-5 h-5" />
                 Create Listing
               </Link>

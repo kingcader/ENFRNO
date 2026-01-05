@@ -2,84 +2,60 @@
 
 @theme {
   --color-brand-orange: #FF4D00;
-  --color-brand-red: #CC0000;
+  --color-brand-black: #111111;
+  --color-brand-gray: #F5F5F5;
 }
 
 /* Custom Base Styles */
 @layer base {
   body {
-    @apply bg-black text-white antialiased font-sans selection:bg-orange-500 selection:text-white;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+    @apply bg-white text-[#111] antialiased font-sans selection:bg-orange-500 selection:text-white;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-black italic tracking-tight;
-    font-family: 'Oswald', sans-serif;
+    @apply font-bold tracking-tight text-[#111];
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   }
 }
 
 /* Component Classes */
 @layer components {
   .btn-primary {
-    @apply bg-white text-black font-bold uppercase tracking-wide px-6 py-3 rounded-none skew-x-[-10deg] 
-    hover:bg-orange-500 hover:text-white transition-all duration-300 transform hover:scale-105
+    @apply bg-[#111] text-white font-medium px-6 py-3 rounded-lg
+    hover:bg-orange-600 transition-all duration-200 transform hover:-translate-y-0.5
     inline-flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed
-    shadow-[4px_4px_0px_0px_rgba(255,77,0,1)];
-  }
-  
-  .btn-primary > * {
-    @apply skew-x-[10deg];
+    shadow-lg shadow-orange-500/20 text-sm;
   }
 
   .btn-secondary {
-    @apply bg-transparent border-2 border-white text-white font-bold uppercase tracking-wide px-6 py-3 rounded-none skew-x-[-10deg]
-    hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-105
-    inline-flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed;
-  }
-
-  .btn-secondary > * {
-    @apply skew-x-[10deg];
+    @apply bg-white border border-[#E5E5E5] text-[#111] font-medium px-6 py-3 rounded-lg
+    hover:border-[#111] transition-all duration-200
+    inline-flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed text-sm;
   }
 
   .input {
-    @apply w-full bg-[#111] border border-[#333] rounded-none px-4 py-3 text-white placeholder-gray-500
-    focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition-all;
+    @apply w-full bg-[#F9F9F9] border border-transparent rounded-lg px-4 py-3 text-[#111] placeholder-gray-400
+    focus:outline-none focus:bg-white focus:border-[#E5E5E5] focus:ring-2 focus:ring-[#111]/5 transition-all;
   }
 
   .card {
-    @apply bg-[#050505] border border-[#222] overflow-hidden transition-all duration-300 hover:border-orange-500/50 hover:shadow-[0_0_30px_-5px_rgba(255,77,0,0.15)];
+    @apply bg-white border border-[#F0F0F0] rounded-xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1;
   }
 
   .badge {
-    @apply px-2 py-1 text-xs font-bold uppercase tracking-wider rounded-none;
+    @apply px-2.5 py-1 text-xs font-semibold rounded-full;
   }
 
   .badge-trade {
-    @apply bg-orange-500 text-white;
+    @apply bg-orange-100 text-orange-700;
   }
 
   .badge-verified {
-    @apply bg-blue-500/20 text-blue-400 border border-blue-500/30;
+    @apply bg-blue-50 text-blue-600;
   }
   
-  .hero-gradient {
-    background: radial-gradient(circle at center, rgba(255, 77, 0, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
-  }
-
-  .grid-pattern {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-    background-size: 50px 50px;
-  }
-
-  /* Custom Scrollbar */
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-  ::-webkit-scrollbar-track {
-    @apply bg-black;
-  }
-  ::-webkit-scrollbar-thumb {
-    @apply bg-[#333] rounded-full hover:bg-orange-500 transition-colors;
+  /* Mobile Bottom Nav safe area */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
   }
 }

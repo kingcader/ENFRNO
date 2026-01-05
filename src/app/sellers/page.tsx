@@ -3,7 +3,6 @@ import { Shield, MapPin, Package } from 'lucide-react'
 import { getDemoSellers, isDemoMode } from '@/lib/demo-data'
 
 async function getSellers() {
-  // Always use demo data for now
   const demoSellers = getDemoSellers()
   
   if (!isDemoMode()) {
@@ -31,7 +30,7 @@ async function getSellers() {
         return sellersWithCounts
       }
     } catch {
-      // Fall through to demo data
+      // Fall through
     }
   }
   
@@ -42,14 +41,14 @@ export default async function SellersPage() {
   const sellers = await getSellers()
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen py-12 bg-white pb-20 md:pb-0">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-5xl md:text-7xl font-black mb-4 uppercase italic">
-            VERIFIED <span className="text-stroke-white text-transparent">SELLERS</span>
+          <h1 className="text-4xl md:text-6xl font-black mb-4 tracking-tight text-[#111]">
+            VERIFIED <span className="text-orange-600">SELLERS</span>
           </h1>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-500 text-lg max-w-2xl mx-auto leading-relaxed">
             Shop with confidence from our community of trusted and verified sellers. 
             Each seller has been vetted to ensure authentic products and reliable service.
           </p>
@@ -57,16 +56,16 @@ export default async function SellersPage() {
 
         {/* Stats */}
         <div className="grid grid-cols-3 gap-6 mb-16 max-w-3xl mx-auto">
-          <div className="text-center p-8 bg-[#0a0a0a] border border-[#222]">
-            <p className="text-4xl font-black text-orange-500 italic">{sellers.length}+</p>
+          <div className="text-center p-8 bg-gray-50 border border-gray-100 rounded-2xl">
+            <p className="text-4xl font-black text-[#111]">{sellers.length}+</p>
             <p className="text-xs text-gray-500 mt-2 font-bold uppercase tracking-widest">Verified Sellers</p>
           </div>
-          <div className="text-center p-8 bg-[#0a0a0a] border border-[#222]">
-            <p className="text-4xl font-black text-orange-500 italic">500+</p>
+          <div className="text-center p-8 bg-gray-50 border border-gray-100 rounded-2xl">
+            <p className="text-4xl font-black text-[#111]">500+</p>
             <p className="text-xs text-gray-500 mt-2 font-bold uppercase tracking-widest">Active Listings</p>
           </div>
-          <div className="text-center p-8 bg-[#0a0a0a] border border-[#222]">
-            <p className="text-4xl font-black text-orange-500 italic">50</p>
+          <div className="text-center p-8 bg-gray-50 border border-gray-100 rounded-2xl">
+            <p className="text-4xl font-black text-[#111]">50</p>
             <p className="text-xs text-gray-500 mt-2 font-bold uppercase tracking-widest">States Covered</p>
           </div>
         </div>
@@ -77,15 +76,15 @@ export default async function SellersPage() {
             <Link
               key={seller.id}
               href={`/seller/${seller.username}`}
-              className="bg-[#050505] border border-[#222] p-6 hover:border-orange-500 transition-all group"
+              className="bg-white border border-gray-100 p-6 rounded-2xl hover:border-orange-200 hover:shadow-lg transition-all duration-300 group hover:-translate-y-1"
             >
               <div className="flex items-start gap-4 mb-6">
-                <div className="w-16 h-16 bg-[#222] flex items-center justify-center text-2xl font-bold flex-shrink-0 text-gray-500 uppercase">
+                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center text-2xl font-bold flex-shrink-0 text-gray-400 group-hover:text-orange-600 transition-colors uppercase">
                   {seller.username.charAt(0).toUpperCase()}
                 </div>
                 <div className="flex-1 min-w-0 pt-1">
                   <div className="flex items-center gap-2 mb-1">
-                    <h3 className="font-black text-xl truncate group-hover:text-orange-500 transition-colors uppercase italic">
+                    <h3 className="font-bold text-xl truncate text-[#111] group-hover:text-orange-600 transition-colors">
                       {seller.username}
                     </h3>
                     {seller.is_verified && (
@@ -96,7 +95,7 @@ export default async function SellersPage() {
                     )}
                   </div>
                   {seller.location && (
-                    <div className="flex items-center gap-1 text-gray-500 text-xs font-bold uppercase tracking-wide">
+                    <div className="flex items-center gap-1 text-gray-400 text-xs font-medium uppercase tracking-wide">
                       <MapPin className="w-3 h-3" />
                       {seller.location}
                     </div>
@@ -105,11 +104,11 @@ export default async function SellersPage() {
               </div>
 
               {seller.bio && (
-                <p className="text-gray-400 text-sm mb-6 line-clamp-2 leading-relaxed h-10">{seller.bio}</p>
+                <p className="text-gray-500 text-sm mb-6 line-clamp-2 leading-relaxed h-10">{seller.bio}</p>
               )}
 
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-orange-500 border-t border-[#222] pt-4">
-                <Package className="w-4 h-4" />
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#111] border-t border-gray-100 pt-4 group-hover:border-orange-100 transition-colors">
+                <Package className="w-4 h-4 text-orange-600" />
                 <span>{seller.listing_count} active listings</span>
               </div>
             </Link>
@@ -117,11 +116,10 @@ export default async function SellersPage() {
         </div>
 
         {/* CTA */}
-        <div className="mt-20 text-center bg-gradient-to-r from-[#111] to-black border border-[#222] p-12 relative overflow-hidden group">
-          <div className="absolute inset-0 bg-orange-500/5 group-hover:bg-orange-500/10 transition-colors duration-500" />
+        <div className="mt-20 text-center bg-gray-50 border border-gray-100 rounded-[2.5rem] p-12 relative overflow-hidden group">
           <div className="relative z-10">
-            <h2 className="text-3xl font-black uppercase italic mb-4">Want to become a verified seller?</h2>
-            <p className="text-gray-400 mb-8 max-w-xl mx-auto">
+            <h2 className="text-3xl font-black text-[#111] mb-4 tracking-tight">Want to become a verified seller?</h2>
+            <p className="text-gray-500 mb-8 max-w-xl mx-auto leading-relaxed">
               Join our community of trusted sellers. Complete your profile and start listing to begin the verification process.
             </p>
             <Link href="/register" className="btn-primary inline-block">

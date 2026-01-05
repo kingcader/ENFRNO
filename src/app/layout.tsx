@@ -1,40 +1,44 @@
-import type { Metadata } from "next";
-import { Oswald, Inter } from "next/font/google";
-import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import './globals.css'
+import type { Metadata, Viewport } from 'next'
+import { Inter, Oswald } from 'next/font/google'
+import Navbar from '@/components/Navbar'
+import MobileNav from '@/components/MobileNav'
+import Footer from '@/components/Footer'
 
-const oswald = Oswald({
-  subsets: ["latin"],
-  variable: "--font-oswald",
-  weight: ["400", "500", "600", "700"],
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
+const inter = Inter({ subsets: ['latin'] })
+const oswald = Oswald({ subsets: ['latin'], variable: '--font-oswald' })
 
 export const metadata: Metadata = {
-  title: "ENFRNO - The Sneaker Marketplace",
-  description: "Buy, sell, and trade sneakers without the fees. Built for the culture.",
-  keywords: ["sneakers", "shoes", "marketplace", "trading", "streetwear"],
-};
+  title: 'ENFRNO - The Sneaker Marketplace',
+  description: 'Buy, sell, and trade authentic sneakers with zero fees.',
+  manifest: '/manifest.json',
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: '#ffffff',
+}
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en">
-      <body className={`${oswald.variable} ${inter.variable} font-sans antialiased`}>
+      <body className={`${inter.className} ${oswald.variable}`}>
         <Navbar />
         <main className="min-h-screen pt-16">
           {children}
         </main>
-        <Footer />
+        <MobileNav />
+        <div className="hidden md:block">
+          <Footer />
+        </div>
       </body>
     </html>
-  );
+  )
 }

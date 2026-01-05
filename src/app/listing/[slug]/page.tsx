@@ -14,7 +14,6 @@ const conditionLabels = {
 }
 
 async function getListing(slug: string) {
-  // Try demo data first
   const demoListing = getDemoListingBySlug(slug)
   if (demoListing) return demoListing
   
@@ -46,49 +45,49 @@ export default async function ListingPage({ params }: { params: Promise<{ slug: 
   }
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen py-12 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
-        <div className="mb-6">
-          <Link href="/browse" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors uppercase tracking-wider text-sm font-bold">
+        <div className="mb-8">
+          <Link href="/browse" className="inline-flex items-center gap-2 text-gray-500 hover:text-black transition-colors uppercase tracking-wider text-xs font-bold">
             <ArrowLeft className="w-4 h-4" />
             Back to Browse
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
           {/* Images */}
-          <div className="space-y-4">
-            <div className="relative aspect-square overflow-hidden bg-[#111] border border-[#222]">
+          <div className="space-y-6">
+            <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-50 rounded-3xl border border-gray-100">
               {listing.images && listing.images.length > 0 ? (
                 <Image
                   src={listing.images[0]}
                   alt={listing.title}
                   fill
-                  className="object-cover"
+                  className="object-contain p-8 hover:scale-105 transition-transform duration-500"
                   priority
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center text-gray-600">
-                  <svg className="w-24 h-24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
+                <div className="w-full h-full flex items-center justify-center text-gray-300">
+                  <span className="text-4xl font-bold opacity-20">No Image</span>
                 </div>
               )}
               
               {/* Badges */}
-              <div className="absolute top-4 left-4 flex gap-2">
+              <div className="absolute top-6 left-6 flex gap-2">
                 {listing.open_to_trades && (
-                  <span className="badge badge-trade">Open to Trades</span>
+                  <span className="px-3 py-1.5 bg-orange-500 text-white text-xs font-bold uppercase tracking-wider rounded-lg shadow-lg shadow-orange-500/20">
+                    Open to Trade
+                  </span>
                 )}
               </div>
             </div>
 
             {/* Thumbnail gallery */}
             {listing.images && listing.images.length > 1 && (
-              <div className="grid grid-cols-4 gap-3">
+              <div className="grid grid-cols-4 gap-4">
                 {listing.images.slice(0, 4).map((image, idx) => (
-                  <div key={idx} className="relative aspect-square overflow-hidden bg-[#111] cursor-pointer hover:border-orange-500 border border-transparent transition-all">
+                  <div key={idx} className="relative aspect-square overflow-hidden bg-gray-50 rounded-xl border border-gray-100 cursor-pointer hover:border-orange-500 transition-colors">
                     <Image
                       src={image}
                       alt={`${listing.title} - Image ${idx + 1}`}
@@ -102,35 +101,38 @@ export default async function ListingPage({ params }: { params: Promise<{ slug: 
           </div>
 
           {/* Details */}
-          <div>
-            <div className="flex items-start justify-between mb-4">
-              <div>
-                <span className="text-sm text-gray-400 uppercase font-bold tracking-widest">{listing.brand}</span>
-                <h1 className="text-4xl md:text-5xl font-black mt-1 uppercase italic leading-none">{listing.title}</h1>
-              </div>
-              <button className="p-3 bg-[#111] hover:bg-[#222] transition-colors">
+          <div className="flex flex-col">
+            <div className="flex items-start justify-between mb-2">
+              <span className="text-sm font-bold text-orange-600 uppercase tracking-widest">{listing.brand}</span>
+              <button className="p-2 text-gray-400 hover:text-black transition-colors">
                 <Share2 className="w-5 h-5" />
               </button>
             </div>
+            
+            <h1 className="text-4xl md:text-5xl font-black uppercase italic leading-[0.9] text-[#111] mb-6">
+              {listing.title}
+            </h1>
 
-            <div className="text-5xl font-black text-orange-500 mb-8 italic">
+            <div className="text-4xl font-bold text-[#111] mb-8">
               ${listing.price.toLocaleString()}
             </div>
 
-            {/* Quick Info */}
-            <div className="grid grid-cols-2 gap-4 mb-8">
-              <div className="bg-[#0a0a0a] border border-[#222] p-4">
-                <span className="text-xs text-gray-500 uppercase font-bold tracking-widest">Size</span>
-                <p className="text-2xl font-black mt-1">{listing.size}</p>
+            {/* Quick Info - Fixed Readability */}
+            <div className="grid grid-cols-2 gap-4 mb-10">
+              <div className="bg-gray-50 border border-gray-100 rounded-2xl p-5 text-center hover:border-orange-200 transition-colors">
+                <span className="text-xs text-gray-500 uppercase font-bold tracking-widest block mb-1">Size</span>
+                <p className="text-3xl font-black text-[#111]">{listing.size}</p>
               </div>
-              <div className="bg-[#0a0a0a] border border-[#222] p-4">
-                <span className="text-xs text-gray-500 uppercase font-bold tracking-widest">Condition</span>
-                <p className="text-2xl font-black mt-1 uppercase">{conditionLabels[listing.condition]}</p>
+              <div className="bg-gray-50 border border-gray-100 rounded-2xl p-5 text-center hover:border-orange-200 transition-colors">
+                <span className="text-xs text-gray-500 uppercase font-bold tracking-widest block mb-1">Condition</span>
+                <p className="text-xl font-bold text-[#111] uppercase leading-tight flex items-center justify-center h-[36px]">
+                  {conditionLabels[listing.condition]}
+                </p>
               </div>
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 mb-10">
+            <div className="flex flex-col sm:flex-row gap-4 mb-12">
               <MessageSellerButton 
                 listingId={listing.id} 
                 sellerId={listing.seller_id}
@@ -146,51 +148,44 @@ export default async function ListingPage({ params }: { params: Promise<{ slug: 
 
             {/* Description */}
             {listing.description && (
-              <div className="mb-10">
-                <h3 className="font-bold text-lg mb-3 uppercase tracking-wide">Description</h3>
-                <p className="text-gray-400 whitespace-pre-wrap leading-relaxed">{listing.description}</p>
+              <div className="mb-12 border-t border-gray-100 pt-8">
+                <h3 className="font-bold text-sm uppercase tracking-widest mb-4 text-[#111]">Description</h3>
+                <p className="text-gray-600 leading-relaxed text-lg">{listing.description}</p>
               </div>
             )}
 
             {/* Seller Card */}
-            <div className="bg-[#0a0a0a] border border-[#222] p-6">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-14 h-14 bg-[#222] flex items-center justify-center text-xl font-bold uppercase text-gray-400">
-                  {listing.profiles?.username?.charAt(0).toUpperCase() || 'S'}
-                </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <Link 
-                      href={`/seller/${listing.profiles?.username}`}
-                      className="font-bold text-lg hover:text-orange-500 transition-colors uppercase"
-                    >
-                      {listing.profiles?.username || 'Seller'}
-                    </Link>
-                    {listing.profiles?.is_verified && (
-                      <span className="badge badge-verified flex items-center gap-1">
-                        <Shield className="w-3 h-3" />
-                        Verified
-                      </span>
-                    )}
-                  </div>
-                  {listing.profiles?.location && (
-                    <div className="flex items-center gap-1 text-gray-400 text-sm mt-1 uppercase tracking-wide font-medium">
-                      <MapPin className="w-4 h-4" />
-                      {listing.profiles.location}
-                    </div>
+            <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm flex items-center gap-5 hover:shadow-md transition-shadow">
+              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center text-2xl font-bold uppercase text-gray-400">
+                {listing.profiles?.username?.charAt(0).toUpperCase() || 'S'}
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-1">
+                  <Link 
+                    href={`/seller/${listing.profiles?.username}`}
+                    className="font-bold text-lg text-[#111] hover:text-orange-600 transition-colors"
+                  >
+                    {listing.profiles?.username || 'Seller'}
+                  </Link>
+                  {listing.profiles?.is_verified && (
+                    <span className="px-2 py-0.5 bg-blue-50 text-blue-600 text-[10px] font-bold uppercase tracking-wider rounded-full flex items-center gap-1">
+                      <Shield className="w-3 h-3" />
+                      Verified
+                    </span>
                   )}
                 </div>
+                {listing.profiles?.location && (
+                  <div className="flex items-center gap-1 text-gray-500 text-xs font-medium uppercase tracking-wide">
+                    <MapPin className="w-3 h-3" />
+                    {listing.profiles.location}
+                  </div>
+                )}
               </div>
-
-              {listing.profiles?.bio && (
-                <p className="text-gray-400 text-sm mb-6">{listing.profiles.bio}</p>
-              )}
-
               <Link 
                 href={`/seller/${listing.profiles?.username}`}
-                className="btn-secondary w-full"
+                className="text-sm font-bold text-orange-600 hover:text-orange-700 underline underline-offset-4"
               >
-                <span>View All Listings</span>
+                View Profile
               </Link>
             </div>
           </div>

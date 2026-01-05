@@ -144,32 +144,32 @@ export default function NewListingPage() {
 
   if (!authChecked) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-orange-500 border-t-transparent rounded-full animate-spin" />
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="w-8 h-8 border-2 border-orange-600 border-t-transparent rounded-full animate-spin" />
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen py-12 bg-gray-50">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
-          <Link href="/dashboard" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-4">
+          <Link href="/dashboard" className="flex items-center gap-2 text-gray-500 hover:text-[#111] transition-colors mb-4 text-sm font-medium">
             <ArrowLeft className="w-4 h-4" />
             Back to Dashboard
           </Link>
-          <h1 className="text-3xl md:text-4xl font-black">Create Listing</h1>
-          <p className="text-gray-400 mt-2">List your sneakers for sale or trade</p>
+          <h1 className="text-3xl md:text-4xl font-bold text-[#111] tracking-tight">Create Listing</h1>
+          <p className="text-gray-500 mt-2 text-lg">List your sneakers for sale or trade</p>
         </div>
 
         {/* Demo Mode Banner */}
         {isDemoMode() && (
-          <div className="mb-6 p-4 bg-orange-500/10 border border-orange-500/50 rounded-lg flex items-start gap-3">
-            <AlertCircle className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
+          <div className="mb-8 p-4 bg-orange-50 border border-orange-100 rounded-xl flex items-start gap-3">
+            <AlertCircle className="w-5 h-5 text-orange-600 flex-shrink-0 mt-0.5" />
             <div>
-              <p className="text-orange-500 font-medium text-sm">Demo Mode</p>
-              <p className="text-gray-400 text-xs mt-1">
+              <p className="text-orange-600 font-bold text-sm">Demo Mode</p>
+              <p className="text-orange-600/80 text-xs mt-1">
                 This form works in demo mode! Your listing won&apos;t be saved to a database.
               </p>
             </div>
@@ -177,7 +177,7 @@ export default function NewListingPage() {
         )}
 
         {error && (
-          <div className="mb-6 p-4 bg-red-500/10 border border-red-500/50 rounded-lg text-red-500 text-sm flex items-center gap-2">
+          <div className="mb-8 p-4 bg-red-50 border border-red-100 rounded-xl text-red-600 text-sm flex items-center gap-2 font-medium">
             <AlertCircle className="w-5 h-5 flex-shrink-0" />
             {error}
           </div>
@@ -185,25 +185,25 @@ export default function NewListingPage() {
 
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Photos */}
-          <div className="bg-[#0a0a0a] border border-[#222] rounded-2xl p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-lg bg-orange-500/20 flex items-center justify-center">
-                <Upload className="w-5 h-5 text-orange-500" />
+          <div className="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center">
+                <Upload className="w-6 h-6 text-orange-600" />
               </div>
               <div>
-                <h2 className="font-bold text-lg">Photos</h2>
-                <p className="text-sm text-gray-400">Add up to 6 photos</p>
+                <h2 className="font-bold text-lg text-[#111]">Photos</h2>
+                <p className="text-sm text-gray-500">Add up to 6 photos</p>
               </div>
             </div>
 
             <div className="grid grid-cols-3 gap-4">
               {images.map((image, idx) => (
-                <div key={idx} className="relative aspect-square rounded-lg overflow-hidden bg-[#111]">
+                <div key={idx} className="relative aspect-square rounded-xl overflow-hidden bg-gray-50 border border-gray-100">
                   <img src={image} alt={`Upload ${idx + 1}`} className="w-full h-full object-cover" />
                   <button
                     type="button"
                     onClick={() => removeImage(idx)}
-                    className="absolute top-2 right-2 p-1 bg-black/50 rounded-full hover:bg-black/80"
+                    className="absolute top-2 right-2 p-1.5 bg-white/90 backdrop-blur-sm rounded-full hover:bg-white text-gray-600 shadow-sm"
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -211,9 +211,9 @@ export default function NewListingPage() {
               ))}
               
               {images.length < 6 && (
-                <label className="aspect-square rounded-lg border-2 border-dashed border-[#333] flex flex-col items-center justify-center cursor-pointer hover:border-orange-500 transition-colors">
-                  <Plus className="w-8 h-8 text-gray-500 mb-2" />
-                  <span className="text-sm text-gray-500">Add Photo</span>
+                <label className="aspect-square rounded-xl border-2 border-dashed border-gray-200 flex flex-col items-center justify-center cursor-pointer hover:border-orange-500 hover:bg-orange-50/50 transition-all group">
+                  <Plus className="w-8 h-8 text-gray-400 group-hover:text-orange-500 mb-2 transition-colors" />
+                  <span className="text-sm text-gray-500 group-hover:text-orange-600 font-medium">Add Photo</span>
                   <input
                     type="file"
                     accept="image/*"
@@ -227,37 +227,37 @@ export default function NewListingPage() {
           </div>
 
           {/* Details */}
-          <div className="bg-[#0a0a0a] border border-[#222] rounded-2xl p-6">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-lg bg-orange-500/20 flex items-center justify-center">
-                <Package className="w-5 h-5 text-orange-500" />
+          <div className="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm">
+            <div className="flex items-center gap-4 mb-8">
+              <div className="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center">
+                <Package className="w-6 h-6 text-orange-600" />
               </div>
               <div>
-                <h2 className="font-bold text-lg">Details</h2>
-                <p className="text-sm text-gray-400">Tell buyers about your kicks</p>
+                <h2 className="font-bold text-lg text-[#111]">Details</h2>
+                <p className="text-sm text-gray-500">Tell buyers about your kicks</p>
               </div>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-6">
               <div>
-                <label className="block text-sm font-medium mb-2">Title *</label>
+                <label className="block text-xs font-bold uppercase tracking-wide text-gray-500 mb-2">Title *</label>
                 <input
                   type="text"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="e.g. Jordan 1 Retro High OG Chicago"
-                  className="input"
+                  className="input bg-gray-50 focus:bg-white"
                   required
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium mb-2">Brand *</label>
+                  <label className="block text-xs font-bold uppercase tracking-wide text-gray-500 mb-2">Brand *</label>
                   <select
                     value={brand}
                     onChange={(e) => setBrand(e.target.value)}
-                    className="input"
+                    className="input bg-gray-50 focus:bg-white"
                     required
                   >
                     <option value="">Select brand</option>
@@ -265,24 +265,24 @@ export default function NewListingPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-2">Model</label>
+                  <label className="block text-xs font-bold uppercase tracking-wide text-gray-500 mb-2">Model</label>
                   <input
                     type="text"
                     value={model}
                     onChange={(e) => setModel(e.target.value)}
                     placeholder="e.g. Air Jordan 1"
-                    className="input"
+                    className="input bg-gray-50 focus:bg-white"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium mb-2">Size *</label>
+                  <label className="block text-xs font-bold uppercase tracking-wide text-gray-500 mb-2">Size *</label>
                   <select
                     value={size}
                     onChange={(e) => setSize(e.target.value)}
-                    className="input"
+                    className="input bg-gray-50 focus:bg-white"
                     required
                   >
                     <option value="">Select size</option>
@@ -290,11 +290,11 @@ export default function NewListingPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-2">Condition *</label>
+                  <label className="block text-xs font-bold uppercase tracking-wide text-gray-500 mb-2">Condition *</label>
                   <select
                     value={condition}
                     onChange={(e) => setCondition(e.target.value)}
-                    className="input"
+                    className="input bg-gray-50 focus:bg-white"
                     required
                   >
                     <option value="">Select condition</option>
@@ -306,12 +306,12 @@ export default function NewListingPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2">Description</label>
+                <label className="block text-xs font-bold uppercase tracking-wide text-gray-500 mb-2">Description</label>
                 <textarea
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="Describe your sneakers - condition details, included accessories, etc."
-                  className="input min-h-[120px] resize-none"
+                  className="input bg-gray-50 focus:bg-white min-h-[120px] resize-none"
                   rows={4}
                 />
               </div>
@@ -319,25 +319,25 @@ export default function NewListingPage() {
           </div>
 
           {/* Pricing */}
-          <div className="bg-[#0a0a0a] border border-[#222] rounded-2xl p-6">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-lg bg-orange-500/20 flex items-center justify-center">
-                <DollarSign className="w-5 h-5 text-orange-500" />
+          <div className="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm">
+            <div className="flex items-center gap-4 mb-8">
+              <div className="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center">
+                <DollarSign className="w-6 h-6 text-orange-600" />
               </div>
               <div>
-                <h2 className="font-bold text-lg">Pricing</h2>
-                <p className="text-sm text-gray-400">Set your asking price</p>
+                <h2 className="font-bold text-lg text-[#111]">Pricing</h2>
+                <p className="text-sm text-gray-500">Set your asking price</p>
               </div>
             </div>
 
-            <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-lg">$</span>
+            <div className="relative max-w-xs">
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl font-bold">$</span>
               <input
                 type="number"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
                 placeholder="0.00"
-                className="input pl-8 text-2xl font-bold"
+                className="input pl-10 text-3xl font-bold text-[#111] bg-gray-50 focus:bg-white h-16"
                 min="0"
                 step="1"
                 required
@@ -346,27 +346,27 @@ export default function NewListingPage() {
           </div>
 
           {/* Trade Options */}
-          <div className="bg-[#0a0a0a] border border-[#222] rounded-2xl p-6">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-lg bg-orange-500/20 flex items-center justify-center">
-                <Repeat className="w-5 h-5 text-orange-500" />
+          <div className="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm">
+            <div className="flex items-center gap-4 mb-8">
+              <div className="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center">
+                <Repeat className="w-6 h-6 text-orange-600" />
               </div>
               <div>
-                <h2 className="font-bold text-lg">Trade Options</h2>
-                <p className="text-sm text-gray-400">Are you open to trades?</p>
+                <h2 className="font-bold text-lg text-[#111]">Trade Options</h2>
+                <p className="text-sm text-gray-500">Are you open to trades?</p>
               </div>
             </div>
 
-            <label className="flex items-center gap-4 cursor-pointer p-4 rounded-lg border border-[#222] hover:border-orange-500 transition-colors">
+            <label className="flex items-center gap-4 cursor-pointer p-6 rounded-xl border border-gray-200 hover:border-orange-500 hover:bg-orange-50/10 transition-all bg-gray-50">
               <input
                 type="checkbox"
                 checked={openToTrades}
                 onChange={(e) => setOpenToTrades(e.target.checked)}
-                className="w-6 h-6 rounded accent-orange-500"
+                className="w-6 h-6 rounded border-gray-300 text-orange-600 focus:ring-orange-500"
               />
               <div>
-                <span className="font-medium">Open to Trades</span>
-                <p className="text-sm text-gray-400">Let buyers offer their sneakers as trade</p>
+                <span className="font-bold text-[#111] block mb-1">Open to Trades</span>
+                <p className="text-sm text-gray-500">Let buyers offer their sneakers as trade</p>
               </div>
             </label>
           </div>
@@ -375,7 +375,7 @@ export default function NewListingPage() {
           <button
             type="submit"
             disabled={loading}
-            className="btn-primary w-full text-lg py-4 flex items-center justify-center"
+            className="btn-primary w-full text-lg py-4 flex items-center justify-center shadow-lg shadow-orange-500/20"
           >
             {loading ? (
               <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />

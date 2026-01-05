@@ -140,8 +140,8 @@ export default function TradesPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-orange-500 border-t-transparent rounded-full animate-spin" />
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="w-8 h-8 border-2 border-orange-600 border-t-transparent rounded-full animate-spin" />
       </div>
     )
   }
@@ -150,25 +150,25 @@ export default function TradesPage() {
   const completedTrades = trades.filter(t => t.status !== 'pending')
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen py-12 bg-gray-50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
-          <Link href="/dashboard" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-4">
+          <Link href="/dashboard" className="flex items-center gap-2 text-gray-500 hover:text-[#111] transition-colors mb-4 text-sm font-medium">
             <ArrowLeft className="w-4 h-4" />
             Back to Dashboard
           </Link>
-          <h1 className="text-3xl font-black">Trade Offers</h1>
-          <p className="text-gray-400 mt-2">Review and respond to trade requests</p>
+          <h1 className="text-3xl md:text-4xl font-bold text-[#111] tracking-tight">Trade Offers</h1>
+          <p className="text-gray-500 mt-2 text-lg">Review and respond to trade requests</p>
         </div>
 
         {/* Demo Mode Banner */}
         {isDemoMode() && (
-          <div className="mb-6 p-4 bg-orange-500/10 border border-orange-500/50 rounded-lg flex items-start gap-3">
-            <AlertCircle className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
+          <div className="mb-8 p-4 bg-orange-50 border border-orange-100 rounded-xl flex items-start gap-3">
+            <AlertCircle className="w-5 h-5 text-orange-600 flex-shrink-0 mt-0.5" />
             <div>
-              <p className="text-orange-500 font-medium text-sm">Demo Mode</p>
-              <p className="text-gray-400 text-xs mt-1">
+              <p className="text-orange-600 font-bold text-sm">Demo Mode</p>
+              <p className="text-orange-600/80 text-xs mt-1">
                 These are demo trade offers. Connect Supabase to receive real offers.
               </p>
             </div>
@@ -176,24 +176,24 @@ export default function TradesPage() {
         )}
 
         {trades.length === 0 ? (
-          <div className="bg-[#0a0a0a] border border-[#222] rounded-xl p-10 text-center">
-            <div className="text-6xl mb-4">🤝</div>
-            <h3 className="text-xl font-bold mb-2">No trade offers yet</h3>
-            <p className="text-gray-400 mb-6">When someone wants to trade with you, it&apos;ll show up here</p>
-            <Link href="/browse" className="btn-primary inline-block">
+          <div className="bg-white border border-gray-100 rounded-2xl p-12 text-center">
+            <div className="text-6xl mb-6 opacity-20">🤝</div>
+            <h3 className="text-xl font-bold text-[#111] mb-2">No trade offers yet</h3>
+            <p className="text-gray-500 mb-8">When someone wants to trade with you, it&apos;ll show up here</p>
+            <Link href="/browse" className="btn-primary inline-block shadow-none">
               Browse Listings
             </Link>
           </div>
         ) : (
-          <div className="space-y-8">
+          <div className="space-y-12">
             {/* Pending Trades */}
             {pendingTrades.length > 0 && (
               <div>
-                <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
-                  <Clock className="w-5 h-5 text-yellow-500" />
+                <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-[#111]">
+                  <Clock className="w-5 h-5 text-orange-500" />
                   Pending ({pendingTrades.length})
                 </h2>
-                <div className="space-y-4">
+                <div className="space-y-6">
                   {pendingTrades.map(trade => (
                     <TradeCard 
                       key={trade.id} 
@@ -209,8 +209,8 @@ export default function TradesPage() {
             {/* Completed Trades */}
             {completedTrades.length > 0 && (
               <div>
-                <h2 className="text-xl font-bold mb-4">History</h2>
-                <div className="space-y-4">
+                <h2 className="text-xl font-bold mb-6 text-[#111]">History</h2>
+                <div className="space-y-6">
                   {completedTrades.map(trade => (
                     <TradeCard 
                       key={trade.id} 
@@ -242,81 +242,83 @@ function TradeCard({
   const isAccepted = trade.status === 'accepted'
   
   return (
-    <div className="bg-[#0a0a0a] border border-[#222] rounded-xl p-6">
-      <div className="flex items-center justify-between mb-4">
+    <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
+      <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-2">
-          <span className="font-bold">{trade.offerer.username}</span>
+          <span className="font-bold text-[#111]">{trade.offerer.username}</span>
           <span className="text-gray-500">wants to trade</span>
         </div>
-        <span className={`text-sm px-3 py-1 rounded-full ${
-          isPending ? 'bg-yellow-500/20 text-yellow-500' :
-          isAccepted ? 'bg-green-500/20 text-green-500' :
-          'bg-red-500/20 text-red-500'
+        <span className={`text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider ${
+          isPending ? 'bg-orange-100 text-orange-700' :
+          isAccepted ? 'bg-green-100 text-green-700' :
+          'bg-red-100 text-red-700'
         }`}>
           {trade.status.charAt(0).toUpperCase() + trade.status.slice(1)}
         </span>
       </div>
 
       {/* Trade Details */}
-      <div className="flex items-center gap-4 mb-4">
+      <div className="flex flex-col md:flex-row items-center gap-4 mb-6 relative">
         {/* Their listing */}
-        <div className="flex-1 bg-[#111] rounded-lg p-3 flex items-center gap-3">
-          <div className="w-16 h-16 rounded-lg overflow-hidden bg-[#222] flex-shrink-0">
+        <div className="flex-1 w-full bg-gray-50 rounded-xl p-4 flex items-center gap-4 border border-gray-100">
+          <div className="w-16 h-16 rounded-lg overflow-hidden bg-white border border-gray-100 flex-shrink-0">
             {trade.offeredListing?.images?.[0] ? (
               <img src={trade.offeredListing.images[0]} alt="" className="w-full h-full object-cover" />
             ) : (
-              <div className="w-full h-full flex items-center justify-center">👟</div>
+              <div className="w-full h-full flex items-center justify-center text-2xl">👟</div>
             )}
           </div>
-          <div>
-            <p className="text-xs text-gray-500">They offer</p>
-            <p className="font-medium text-sm truncate">{trade.offeredListing?.title || 'Cash Only'}</p>
+          <div className="min-w-0">
+            <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-0.5">They offer</p>
+            <p className="font-bold text-[#111] text-sm truncate">{trade.offeredListing?.title || 'Cash Only'}</p>
             {trade.offeredListing && (
-              <p className="text-orange-500 font-bold">${trade.offeredListing.price}</p>
+              <p className="text-orange-600 font-bold">${trade.offeredListing.price}</p>
             )}
           </div>
         </div>
 
-        <div className="text-2xl">→</div>
+        <div className="text-2xl text-gray-300 rotate-90 md:rotate-0">→</div>
 
         {/* Your listing */}
-        <div className="flex-1 bg-[#111] rounded-lg p-3 flex items-center gap-3">
-          <div className="w-16 h-16 rounded-lg overflow-hidden bg-[#222] flex-shrink-0">
+        <div className="flex-1 w-full bg-gray-50 rounded-xl p-4 flex items-center gap-4 border border-gray-100">
+          <div className="w-16 h-16 rounded-lg overflow-hidden bg-white border border-gray-100 flex-shrink-0">
             {trade.listing.images?.[0] ? (
               <img src={trade.listing.images[0]} alt="" className="w-full h-full object-cover" />
             ) : (
-              <div className="w-full h-full flex items-center justify-center">👟</div>
+              <div className="w-full h-full flex items-center justify-center text-2xl">👟</div>
             )}
           </div>
-          <div>
-            <p className="text-xs text-gray-500">Your listing</p>
-            <p className="font-medium text-sm truncate">{trade.listing.title}</p>
-            <p className="text-orange-500 font-bold">${trade.listing.price}</p>
+          <div className="min-w-0">
+            <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-0.5">Your listing</p>
+            <p className="font-bold text-[#111] text-sm truncate">{trade.listing.title}</p>
+            <p className="text-orange-600 font-bold">${trade.listing.price}</p>
           </div>
         </div>
       </div>
 
       {/* Cash Offer */}
       {trade.cash_offer && trade.cash_offer > 0 && (
-        <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-3 mb-4 text-center">
-          <span className="text-green-500 font-bold">+${trade.cash_offer} cash</span>
+        <div className="bg-green-50 border border-green-100 rounded-xl p-3 mb-6 text-center">
+          <span className="text-green-600 font-bold">+${trade.cash_offer} cash included</span>
         </div>
       )}
 
       {/* Message */}
       {trade.message && (
-        <p className="text-gray-400 text-sm mb-4 p-3 bg-[#111] rounded-lg italic">
-          &ldquo;{trade.message}&rdquo;
-        </p>
+        <div className="bg-gray-50 rounded-xl p-4 mb-6 border border-gray-100">
+          <p className="text-gray-500 text-sm italic">
+            &ldquo;{trade.message}&rdquo;
+          </p>
+        </div>
       )}
 
       {/* Actions */}
       {isPending && (
-        <div className="flex gap-3">
+        <div className="flex gap-4">
           <button
             onClick={() => onAction(trade.id, 'accept')}
             disabled={loading}
-            className="flex-1 btn-primary flex items-center justify-center gap-2"
+            className="flex-1 btn-primary flex items-center justify-center gap-2 shadow-none"
           >
             {loading ? (
               <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -330,7 +332,7 @@ function TradeCard({
           <button
             onClick={() => onAction(trade.id, 'reject')}
             disabled={loading}
-            className="flex-1 btn-secondary flex items-center justify-center gap-2 border-red-500/50 text-red-500 hover:bg-red-500/10"
+            className="flex-1 btn-secondary flex items-center justify-center gap-2 text-red-600 hover:bg-red-50 hover:border-red-200 border-gray-200"
           >
             <X className="w-5 h-5" />
             Decline
